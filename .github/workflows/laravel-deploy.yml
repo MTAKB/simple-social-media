@@ -16,8 +16,6 @@ jobs:
         run: docker rm -f $(docker ps -a | grep 'mysql\|social\|media' | awk '{print $1}')
       - name: Running mysql in container
         run:  docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=social_media -p 3306:3306 mysql:5.7
-      - name: List docker container
-        run: docker ps -a
   build-push-image:
     needs: run-mysql-in-docker
     runs-on: self-hosted
@@ -26,8 +24,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Build Image
         run: docker build -t $IMAGE_NAME .
-      - name: List Image
-        run: docker image ls
       - name: Login to Docker Registry
         uses: docker/login-action@v3
         with:
