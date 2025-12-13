@@ -39,4 +39,4 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: start container
-        run: docker compose up -d
+        run: docker-compose up -d
